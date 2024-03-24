@@ -1,5 +1,6 @@
-#ifndef BLOOMFILER_H
-#define BLOOMFILER_H
+#ifndef BLOOMFILTER_H
+#define BLOOMFILTER_H
+
 #include <cstdint>
 #include <vector>
 #include <array>

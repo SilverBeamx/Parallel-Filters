@@ -1,2 +1,6 @@
 bloomFilter
 .vscode/settings.json
+bloomFilter.o
+testBloomFilter
+testThreadedBloom
+threadedBloom.o
