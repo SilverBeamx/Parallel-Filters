@@ -1,3 +1,5 @@
+CXXFLAGS = -Wall -Wextra -Wno-unused-parameter --stdlib=libc++ --std=c++11
+
 bloomFilter.o: bloomFilter.cpp bloomFilter.h
 	g++ -c bloomFilter.cpp
 
@@ -6,6 +8,9 @@ threadedBloom.o: bloomFilter.o threadedBloom.cpp threadedBloom.h
 
 utils.o: utils.cpp utils.h
 	g++ -c utils.cpp
+
+args.o:
+	$(CXX) $(CXXFLAGS) -c -o args.o argspp/src/args.cpp
 
 testBloomFilter.exe: bloomFilter.o testBloomFilter.cpp
 	g++ -o testBloomFilter.exe bloomFilter.o testBloomFilter.cpp -lcrypto

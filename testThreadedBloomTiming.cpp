@@ -17,11 +17,12 @@ int main(){
     std::vector<std::string> lineVector;
     readFileByLine("./generate_input_script/fruitList.txt", lineVector);
 
+    auto t1 = high_resolution_clock::now();
+
     ThreadedBloom* tb = new ThreadedBloom(1234, 12);
 
     tb->addFilter((unsigned char*)"test", 4);
 
-    auto t1 = high_resolution_clock::now();
     auto result = tb->isProbablyPresent(lineVector);
     auto t2 = high_resolution_clock::now();
     auto time_elapsed = duration_cast<microseconds>(t2 - t1);
