@@ -4,7 +4,7 @@
 #include <vector>
 
 int main(){
-    std::vector<const char*> testList{"this", "that", "thot", "test"};
+    std::vector<std::string> testList{"this", "that", "thot", "test"};
     ThreadedBloom* tb = new ThreadedBloom(1234, 3);
 
     tb->addFilter((unsigned char*)"test", 4);
