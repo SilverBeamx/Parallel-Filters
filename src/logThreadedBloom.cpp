@@ -39,7 +39,7 @@ int main(int argc, char **argv){
     auto t2 = high_resolution_clock::now();
     auto time_elapsed = duration_cast<microseconds>(t2 - t1);
 
-    std::cout << "Elapsed filter find time: " << time_elapsed.count() << " us" << std::endl;
+    std::cout << "Elapsed filter find timeee: " << time_elapsed.count() << " us" << std::endl;
 
     if(cmd_parser.found("log")){
         std::ofstream output("log/threadedTiming.txt", std::ios_base::app);
