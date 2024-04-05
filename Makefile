@@ -4,14 +4,23 @@ bloomFilter.o: bloomFilter.cpp bloomFilter.h
 threadedBloom.o: bloomFilter.o threadedBloom.cpp threadedBloom.h
 	g++ -c threadedBloom.cpp
 
-buildTestBloomFilter: bloomFilter.o testBloomFilter.cpp
-	g++ -o testBloomFilter bloomFilter.o testBloomFilter.cpp -lcrypto
+utils.o: utils.cpp utils.h
+	g++ -c utils.cpp
 
-testBloom: buildTestBloomFilter
-	./testBloomFilter
+testBloomFilter.exe: bloomFilter.o testBloomFilter.cpp
+	g++ -o testBloomFilter.exe bloomFilter.o testBloomFilter.cpp -lcrypto
 
-buildTestThreadedBloom: threadedBloom.o testThreadedBloom.cpp
-	g++ -o testThreadedBloom bloomFilter.o threadedBloom.o testThreadedBloom.cpp -lcrypto
+testBloom: testBloomFilter.exe
+	./testBloomFilter.exe
 
-testThreadedBloom: buildTestThreadedBloom
-	./testThreadedBloom
+testThreadedBloom.exe: threadedBloom.o testThreadedBloom.cpp
+	g++ -o testThreadedBloom.exe bloomFilter.o threadedBloom.o testThreadedBloom.cpp -lcrypto
+
+testThreadedBloom: testThreadedBloom.exe
+	./testThreadedBloom.exe
+
+testThreadedBloomTiming.exe: threadedBloom.o utils.o testThreadedBloomTiming.cpp
+	g++ -o testThreadedBloomTiming.exe bloomFilter.o threadedBloom.o utils.o testThreadedBloomTiming.cpp -lcrypto
+
+testThreadedBloomTiming: testThreadedBloomTiming.exe
+	./testThreadedBloomTiming.exe
