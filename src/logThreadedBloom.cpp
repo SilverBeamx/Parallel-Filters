@@ -27,7 +27,7 @@ int main(int argc, char **argv){
     uint32_t numThreads = std::stoi(cmd_parser.value("numThreads"));
 
     std::vector<std::string> lineVector;
-    readFileByLine("./generate_input_script/fruitList.txt", lineVector);
+    readFileByLine("./scripts/fruitList.txt", lineVector);
 
     auto t1 = high_resolution_clock::now();
 
@@ -42,8 +42,8 @@ int main(int argc, char **argv){
     std::cout << "Elapsed filter find time: " << time_elapsed.count() << " us" << std::endl;
 
     if(cmd_parser.found("log")){
-        std::ofstream output("log/threadedTiming.txt", std::ios_base::app);
-        output << numThreads << "," << time_elapsed.count() << std::endl;
+        std::ofstream output("log/threadedTiming.csv", std::ios_base::app);
+        output << lineVector.size() << "," << numThreads << "," << time_elapsed.count() << std::endl;
     }
 
     return 0;
