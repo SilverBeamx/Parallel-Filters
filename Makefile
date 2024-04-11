@@ -14,7 +14,7 @@ OBJS := $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRC)))))
 NON_MAIN_OBJS := $(filter-out $(OBJ_PATH)/$(MAIN_FILE).o, $(OBJS))
 
 run: $(BIN_PATH)/threadedBloom.exe
-	./$(BIN_PATH)/threadedBloom.exe -l
+	./$(BIN_PATH)/threadedBloom.exe
 
 $(BIN_PATH)/threadedBloom.exe: $(OBJS)
 	$(CXX) -o $(BIN_PATH)/threadedBloom.exe $(OBJS) $(CFLAGS)
