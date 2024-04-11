@@ -1,7 +1,9 @@
 import argparse
+import os
 import random
 
 #Random fruits list
+random.seed(42)
 fruits = ["Apple", "Banana", "Peach", "Kiwi", "Pear ", "Tomato", "Plum"]
 length = 10000000
 
@@ -15,8 +17,8 @@ if args.ListLength:
     length = int(args.ListLength)
 
 #Print random list to file
-with open("fruitList.txt","w") as f:
-    f.write(str(length)+'\n')
+dir_path = os.path.dirname(os.path.realpath(__file__))
+with open(f"{dir_path}/fruitList.txt","w") as f:
     for _ in range(length):
        index = random.randint(0,len(fruits)-1)
        f.write(fruits[index]+'\n')
