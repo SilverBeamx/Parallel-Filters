@@ -37,7 +37,7 @@ int main(int argc, char **argv){
 
     auto result = tb->isProbablyPresent(lineVector);
     auto t2 = high_resolution_clock::now();
-    auto time_elapsed = duration_cast<microseconds>(t2 - t1);
+    auto time_elapsed = duration_cast<milliseconds>(t2 - t1);
 
     std::cout << "Elapsed filter find time: " << time_elapsed.count() << " us" << std::endl;
 
