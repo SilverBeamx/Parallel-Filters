@@ -18,6 +18,8 @@ int main(int argc, char **argv){
     using std::chrono::milliseconds;
     using std::chrono::microseconds;
 
+    std::cout << "Parsing args" << std::endl;
+
     ArgParser cmd_parser("Usage: -n/--numThreads [NUM_THREADS]\n-l/--log Log to output.txt", "1.0");
 
     cmd_parser.flag("log l");
@@ -25,9 +27,11 @@ int main(int argc, char **argv){
     cmd_parser.parse(argc, argv);
 
     uint32_t numThreads = std::stoi(cmd_parser.value("numThreads"));
+    std::cout << "Loading dataset" << std::endl;
 
     std::vector<std::string> lineVector;
     readFileByLine("./scripts/fruitList.txt", lineVector);
+    std::cout << "Dataset loaded: " << lineVector.size() << " words loaded" << std::endl;
 
     auto t1 = steady_clock::now();
 
@@ -37,7 +41,7 @@ int main(int argc, char **argv){
 
     auto result = tb->isProbablyPresent(lineVector);
     auto t2 = steady_clock::now();
-    auto time_elapsed = duration_cast<milliseconds>(t2 - t1);
+    auto time_elapsed = duration_cast<microseconds>(t2 - t1);
 
     std::cout << "Elapsed filter find time: " << time_elapsed.count() << " ms" << std::endl;
 
