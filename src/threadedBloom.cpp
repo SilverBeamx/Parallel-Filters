@@ -31,7 +31,7 @@ void ThreadedBloom::dispatchWork(std::vector<std::string>& wordList, uint32_t st
 
 std::vector<bool> ThreadedBloom::isProbablyPresent(std::vector<std::string>& wordList){
 
-    std::thread threadList[numThreads];
+    std::vector<std::thread> threadList(numThreads);
     uint32_t threadWorkAmount = wordList.size() / numThreads;
     int leftoverWork = wordList.size() % numThreads;
     uint32_t startingIndex = 0;
