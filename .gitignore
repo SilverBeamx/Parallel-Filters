@@ -2,3 +2,9 @@
 *.o
 *.exe
 *.txt
+*.diagsession
+*.pdb
+Parallel-Filters
+x64
+GPUCache
+DawnCache
