@@ -4,8 +4,8 @@ SRC_PATH := src
 TEST_PATH := test
 INC_PATH := $(SRC_PATH)/include
 
-CFLAGS = -I$(INC_PATH) -lcrypto 
-CXXOBJFLAGS = -I$(INC_PATH) -c
+CFLAGS = -I$(INC_PATH) -lcrypto -O2
+CXXOBJFLAGS = -I$(INC_PATH) -c -O2
 
 MAIN_FILE := logThreadedBloom
 
