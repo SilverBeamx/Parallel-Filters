@@ -4,6 +4,8 @@
 *.txt
 *.diagsession
 *.pdb
+*.log
+*.orig
 Parallel-Filters
 x64
 GPUCache
