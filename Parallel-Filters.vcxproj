@@ -129,12 +129,14 @@
     <ClCompile Include="src\args.cpp" />
     <ClCompile Include="src\bloomFilter.cpp" />
     <ClCompile Include="src\logThreadedBloom.cpp" />
+    <ClCompile Include="src\MurmurHash3.cpp" />
     <ClCompile Include="src\threadedBloom.cpp" />
     <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\include\args.h" />
     <ClInclude Include="src\include\bloomFilter.h" />
+    <ClInclude Include="src\include\MurmurHash3.h" />
     <ClInclude Include="src\include\threadedBloom.h" />
     <ClInclude Include="src\include\utils.h" />
   </ItemGroup>
