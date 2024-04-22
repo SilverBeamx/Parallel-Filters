@@ -6,7 +6,7 @@ word_start = 1000
 word_end = 10000000
 word_multiplier = 100
 max_threads = 25
-runs = 15
+runs = 20
 
 def reset_log():
     with open("log/threadedTiming.csv","w") as f:
