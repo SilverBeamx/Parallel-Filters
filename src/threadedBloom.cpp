@@ -5,8 +5,11 @@
 #include <thread>
 #include <future>
 
-ThreadedBloom::ThreadedBloom(uint64_t filterSize, uint32_t numThreads){
-    this->bf = new BloomFilter(filterSize);
+#include <sched.h>
+#include <pthread.h>
+
+ThreadedBloom::ThreadedBloom(uint64_t filterSize, uint32_t numThreads, bool useMD5){
+    this->bf = new BloomFilter(filterSize, useMD5);
     this->numThreads = numThreads;
 }
 
@@ -19,7 +22,14 @@ void ThreadedBloom::addFilter(const unsigned char* buf, uint32_t len){
 }
 
 void ThreadedBloom::dispatchWork(std::vector<std::string>& wordList, uint32_t startingIndex, 
-                                 uint32_t workSize, std::vector<bool>& result){
+                                 uint32_t workSize, uint32_t core, std::vector<bool>& result){
+
+    pthread_t self = pthread_self();
+    cpu_set_t cpuset;
+    CPU_ZERO(&cpuset);
+    CPU_SET(core, &cpuset);
+    
+    int rc = pthread_setaffinity_np(self, sizeof(cpu_set_t), &cpuset);
 
     for(uint32_t i = 0; i < workSize; i++){
         uint32_t workIndex = startingIndex+i;
@@ -36,10 +46,12 @@ std::vector<bool> ThreadedBloom::isProbablyPresent(std::vector<std::string>& wor
     int leftoverWork = wordList.size() % numThreads;
     uint32_t startingIndex = 0;
     std::vector<bool> result(wordList.size(), false);
+    uint32_t totalCores = std::thread::hardware_concurrency();
 
     for (int i = 0; i < numThreads; i++) {
         uint32_t workSize = threadWorkAmount + (leftoverWork-- > 0 ? 1 : 0);
-        threadList[i] = std::thread(&ThreadedBloom::dispatchWork, this, std::ref(wordList), startingIndex, workSize, std::ref(result));
+        threadList[i] = std::thread(&ThreadedBloom::dispatchWork, this, std::ref(wordList), startingIndex,
+                                    workSize, i%totalCores, std::ref(result));
         startingIndex += workSize;
     }
 
