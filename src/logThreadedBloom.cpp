@@ -35,7 +35,7 @@ int main(int argc, char **argv){
 
     auto t1 = steady_clock::now();
 
-    ThreadedBloom* tb = new ThreadedBloom(1234, numThreads);
+    ThreadedBloom* tb = new ThreadedBloom(1234, numThreads, false);
 
     tb->addFilter((unsigned char*)"test", 4);
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv){
     auto t2 = steady_clock::now();
     auto time_elapsed = duration_cast<microseconds>(t2 - t1);
 
-    std::cout << "Elapsed filter find time: " << time_elapsed.count() << " ms" << std::endl;
+    std::cout << "Elapsed filter find time: " << time_elapsed.count() << " us" << std::endl;
 
     if(cmd_parser.found("log")){
         std::ofstream output("log/threadedTiming.csv", std::ios_base::app);
