@@ -15,6 +15,9 @@ word_amount_list = [1000,100000,10000000]
 dir_path = os.path.dirname(os.path.realpath(__file__))
 df = pd.read_csv(f"{dir_path}/../log/threadedTiming.csv")
 
+#Adjust to Milliseconds
+df['microSeconds'] = df['microSeconds'] / 1000
+
 #Plot threads
 for word_amount in word_amount_list:
     if word_amount != word_amount_list[0] and word_amount != word_amount_list[1]:
@@ -26,7 +29,7 @@ for word_amount in word_amount_list:
 plt.title("Mean execution time at varying thread amounts\n")
 #plt.gca().xaxis.set_major_locator(plt.MultipleLocator(1))
 plt.xlabel("Amount of threads")
-plt.ylabel("Execution time in Microseconds (us)")
+plt.ylabel("Execution time in Milliseconds (ms)")
 plt.grid()
 plt.legend(loc='upper right')
 
@@ -44,7 +47,7 @@ for ix, word_amount in enumerate(word_amount_list):
     plt.title("Mean execution time at varying thread amounts\n")
     #plt.gca().xaxis.set_major_locator(plt.MultipleLocator(1))
     plt.xlabel("Amount of threads")
-    plt.ylabel("Execution time in Microseconds (us)")
+    plt.ylabel("Execution time in Milliseconds (ms)")
     plt.grid()
     plt.legend(loc='upper right')
 
@@ -73,19 +76,19 @@ plt.savefig(f"{dir_path}/plots/cumulativeSpeedup.png")
 plt.clf()
 
 
-#Plot Scalability at 20 Threads
-line_df = df.loc[df['threadAmount'] == 20]
-line_df = line_df.reset_index(drop=True)
-
-sns.lineplot(x='wordAmount', y='microSeconds', data=line_df, errorbar=None,
-             marker='o', legend='auto', label=f'Mean execution time')
-
-plt.title("Scalability at 20 threads\n")
-#plt.gca().xaxis.set_major_locator(plt.MultipleLocator(1))
-plt.xlabel("Amount of words")
-plt.ylabel("Execution time in Microseconds (us)")
-plt.grid()
-plt.legend(loc='upper left')
-plt.savefig(f"{dir_path}/plots/scalability.png")
-plt.clf()
+##Plot Scalability at 20 Threads
+#line_df = df.loc[df['threadAmount'] == 20]
+#line_df = line_df.reset_index(drop=True)
+#
+#sns.lineplot(x='wordAmount', y='microSeconds', data=line_df, errorbar=None,
+#             marker='o', legend='auto', label=f'Mean execution time')
+#
+#plt.title("Scalability at 20 threads\n")
+##plt.gca().xaxis.set_major_locator(plt.MultipleLocator(1))
+#plt.xlabel("Amount of words")
+#plt.ylabel("Execution time in Microseconds (us)")
+#plt.grid()
+#plt.legend(loc='upper left')
+#plt.savefig(f"{dir_path}/plots/scalability.png")
+#plt.clf()
 
